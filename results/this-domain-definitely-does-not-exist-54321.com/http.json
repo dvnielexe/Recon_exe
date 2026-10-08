@@ -1,0 +1,10 @@
+{
+    "http": {
+        "url": "http://this-domain-definitely-does-not-exist-54321.com",
+        "error": "HTTPConnectionPool(host='this-domain-definitely-does-not-exist-54321.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPConnection(host='this-domain-definitely-does-not-exist-54321.com', port=80): Failed to resolve 'this-domain-definitely-does-not-exist-54321.com' ([Errno -2] Name or service not known)\"))"
+    },
+    "https": {
+        "url": "https://this-domain-definitely-does-not-exist-54321.com",
+        "error": "HTTPSConnectionPool(host='this-domain-definitely-does-not-exist-54321.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='this-domain-definitely-does-not-exist-54321.com', port=443): Failed to resolve 'this-domain-definitely-does-not-exist-54321.com' ([Errno -2] Name or service not known)\"))"
+    }
+}

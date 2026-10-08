@@ -1,6 +1,7 @@
 from pathlib import Path
 from recon.core.config import Config
-from recon.modules.dns import scan
+from recon.modules import dns
+from recon.modules import http
 from recon.core.output import save_json
 
 class Runner():
@@ -21,11 +22,11 @@ class Runner():
             print(f"[VERBOSE]: Output directory set to {self.config.output}")
 
         
-        dns_results = scan(self.config.target)
+        dns_results = dns.scan(self.config.target)
 
         if output_dir:
-            output_path = save_json(output_dir, "dns.json", dns_results)
-            print(f"\nDNS results saved to: {output_path}")
+            dns_output_path = save_json(output_dir, "dns.json", dns_results)
+            print(f"\nDNS results saved to: {dns_output_path}")
 
         print("\nDNS Results: ")
 
@@ -37,3 +38,32 @@ class Runner():
                     print(f" -{record}")
             else:
                 print(" No records found")
+
+        http_results = http.scan(self.config.target)
+
+        if output_dir:
+            http_output_path = save_json(output_dir, "http.json", http_results)
+            print(f"\nHTTP Results saved to: {http_output_path}")
+
+        print(f"\nHTTP Results:")
+
+        for protocol, result in http_results.items():
+            print(f"\n{protocol.upper()}:")
+
+            if "error" in result:
+                print(f"Error: {result['error']}")
+                continue
+
+            print(f"URL: {result['url']}")
+            print(f"Status: {result['url']}")
+            print(f"Server: {result['server']}")
+            print(f"Content-Type: {result['content-type']}")
+            print(f"Redirect: {result['redirect']}")
+
+            print("Security Headers: ")
+            if result["security_headers"]:
+                for header, value in result["security_headers"].items():
+                    print(f" {header}: {value}")
+
+            else:
+                print("None found")
