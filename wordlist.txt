@@ -1,0 +1,16 @@
+www
+www
+https://example.com
+admin/path
+api
+dev
+staging
+test
+mail
+admin
+portal
+app
+blog
+shop
+support
+vpn

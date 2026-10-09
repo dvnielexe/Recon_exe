@@ -2,6 +2,7 @@ from pathlib import Path
 from recon.core.config import Config
 from recon.modules import dns
 from recon.modules import http
+from recon.modules import subdomains
 from recon.core.output import save_json
 
 class Runner():
@@ -21,7 +22,7 @@ class Runner():
         if self.config.verbose:
             print(f"[VERBOSE]: Output directory set to {self.config.output}")
 
-        
+        # DNS
         dns_results = dns.scan(self.config.target)
 
         if output_dir:
@@ -39,6 +40,27 @@ class Runner():
             else:
                 print(" No records found")
 
+        # Subdomain
+        try:
+             subdomain_results = subdomains.scan(self.config.target, self.config.wordlist)
+        except(FileNotFoundError, PermissionError, UnicodeDecodeError) as error:
+            print(f"\n[!] Subdomain scan failed: {error}")
+            subdomain_results = []
+
+        if output_dir:
+            subdomain_output_path = save_json(output_dir, "subdomain.json", subdomain_results)
+            print(f"\nSubdomain results saved to {subdomain_output_path}")
+
+        print("\n[+] Subdomains")
+
+        for result in subdomain_results:
+            print(f" - {result['subdomain']}")
+
+            for record_type, addresses in result["ips"].items():
+                if addresses:
+                    print(f"    {record_type}: {"," .join(addresses)}")
+
+        # HTTP
         http_results = http.scan(self.config.target)
 
         if output_dir:
@@ -55,7 +77,7 @@ class Runner():
                 continue
 
             print(f"URL: {result['url']}")
-            print(f"Status: {result['url']}")
+            print(f"Status: {result['status_code']}")
             print(f"Server: {result['server']}")
             print(f"Content-Type: {result['content-type']}")
             print(f"Redirect: {result['redirect']}")

@@ -8,13 +8,15 @@ def main():
     parser.add_argument("target", help="Target domain or ip address")
     parser.add_argument("-o", "--output", help="Path to save output results")
     parser.add_argument("-v", "--verbose", action="store_true", help="Enables verbose logging")
+    parser.add_argument("-w", "--wordlist", help="path to subdomain wordlist")
 
     args = parser.parse_args()
 
     config = Config(
         target=args.target,
         output=args.output,
-        verbose=args.verbose
+        verbose=args.verbose,
+        wordlist=args.wordlist,
     )
 
     runner = Runner(config)
