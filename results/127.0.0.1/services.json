@@ -1,0 +1,58 @@
+[
+    {
+        "host": "127.0.0.1",
+        "port": 22,
+        "protocol": "tcp",
+        "state": "closed",
+        "service": null,
+        "version": null
+    },
+    {
+        "host": "127.0.0.1",
+        "port": 80,
+        "protocol": "tcp",
+        "state": "closed",
+        "service": null,
+        "version": null
+    },
+    {
+        "host": "127.0.0.1",
+        "port": 443,
+        "protocol": "tcp",
+        "state": "closed",
+        "service": null,
+        "version": null
+    },
+    {
+        "host": "127.0.0.1",
+        "port": 3306,
+        "protocol": "tcp",
+        "state": "closed",
+        "service": null,
+        "version": null
+    },
+    {
+        "host": "127.0.0.1",
+        "port": 5432,
+        "protocol": "tcp",
+        "state": "closed",
+        "service": null,
+        "version": null
+    },
+    {
+        "host": "127.0.0.1",
+        "port": 8000,
+        "protocol": "tcp",
+        "state": "open",
+        "service": "http",
+        "version": null
+    },
+    {
+        "host": "127.0.0.1",
+        "port": 8080,
+        "protocol": "tcp",
+        "state": "closed",
+        "service": null,
+        "version": null
+    }
+]

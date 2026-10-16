@@ -1,0 +1,10 @@
+{
+    "http": {
+        "url": "http://127.0.0.1",
+        "error": "HTTPConnectionPool(host='127.0.0.1', port=80): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=80): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+    },
+    "https": {
+        "url": "https://127.0.0.1",
+        "error": "HTTPSConnectionPool(host='127.0.0.1', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host='127.0.0.1', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+    }
+}

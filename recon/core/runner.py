@@ -3,6 +3,7 @@ from recon.core.config import Config
 from recon.modules import dns
 from recon.modules import http
 from recon.modules import subdomains
+from recon.modules import services
 from recon.core.output import save_json
 
 class Runner():
@@ -89,3 +90,25 @@ class Runner():
 
             else:
                 print("None found")
+
+        # Service Discovery scan
+        if self.config.services:
+            print("\n[+] Service Discovery")
+
+            service_results = services.scan(self.config.target)
+
+            service_output_path = save_json(output_dir, "services.json", service_results)
+            print(f"Service results saved to: {service_output_path}")
+
+            for result in service_results:
+                print(
+                    f" - {result['host']}:{result['port']}/"
+                    f"{result['protocol']} | "
+                    f"{result['state']} | "
+                    f"{result['service']} | "
+                    f"Version: {result['version']}"
+                )
+
+        else:
+            if self.config.verbose:
+                print("\n [VERBOSE] Service discovery skipped. Use --services to enable it.")

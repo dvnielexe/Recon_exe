@@ -9,6 +9,7 @@ def main():
     parser.add_argument("-o", "--output", help="Path to save output results")
     parser.add_argument("-v", "--verbose", action="store_true", help="Enables verbose logging")
     parser.add_argument("-w", "--wordlist", help="path to subdomain wordlist")
+    parser.add_argument("-s", "--services", action="store_true", help="Enabele TCP service discovery")
 
     args = parser.parse_args()
 
@@ -17,6 +18,7 @@ def main():
         output=args.output,
         verbose=args.verbose,
         wordlist=args.wordlist,
+        services=args.services,
     )
 
     runner = Runner(config)
