@@ -4,6 +4,7 @@ from recon.modules import dns
 from recon.modules import http
 from recon.modules import subdomains
 from recon.modules import services
+from recon.modules import urls
 from recon.core.output import save_json
 
 class Runner():
@@ -112,3 +113,26 @@ class Runner():
         else:
             if self.config.verbose:
                 print("\n [VERBOSE] Service discovery skipped. Use --services to enable it.")
+
+
+       # URL Intelligence
+        if self.config.urls:
+            print("\n[+] Url Intelligence")
+
+            url_results = urls.scan(self.config.target)
+
+            url_output_path = save_json(output_dir, "urls.json", url_results)
+            print(f"URL Results saved to: {url_output_path}")
+
+            print(f"Starting URL: {url_results['start_url']}")
+            print(f"URLs Found: {url_results['urls_found']}")
+
+            for result in url_results["results"]:
+
+                print(f"\n URL: {result['url']}")
+                print(f" Endpoint: {result['endpoint']}")
+
+                if result["parameters"]:
+                    print(f" Parameters: {result['parameters']}")
+                else:
+                    print(f" Parameters: None")
