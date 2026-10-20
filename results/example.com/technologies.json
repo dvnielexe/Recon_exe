@@ -1,0 +1,20 @@
+{
+    "url": "https://example.com/",
+    "technologies": [
+        {
+            "category": "Web Server",
+            "name": "cloudflare",
+            "evidence": [
+                "Server response header"
+            ]
+        },
+        {
+            "category": "CDN / Reverse proxy",
+            "name": "Cloudflare",
+            "evidence": [
+                "Cloudflare-related response header"
+            ]
+        }
+    ],
+    "error": null
+}

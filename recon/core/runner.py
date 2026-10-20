@@ -5,6 +5,7 @@ from recon.modules import http
 from recon.modules import subdomains
 from recon.modules import services
 from recon.modules import urls
+from recon.modules import technologies
 from recon.core.output import save_json
 
 class Runner():
@@ -136,3 +137,31 @@ class Runner():
                     print(f" Parameters: {result['parameters']}")
                 else:
                     print(f" Parameters: None")
+
+
+        # Technology Identification
+        print("\n[] Technology Identification")
+
+        technology_results = technologies.scan(self.config.target)
+        
+        if output_dir:
+            technology_output_path = save_json(output_dir, "technologies.json", technology_results)
+            print(f"Results saved to: {technology_output_path}")
+
+        if technology_results["error"]:
+            print(
+                f"Technology scan failed: "
+                f"{technology_results['error']}"
+            )
+        elif technology_results["technologies"]:
+            for finding in technology_results["technologies"]:
+                print(
+                    f" - {finding['name']}"
+                    f"({finding['category']})"
+                )
+
+                for evidence in finding["evidence"]:
+                    print(f" Evidence:  {evidence}")
+
+        else:
+            print("No technologies identified.")

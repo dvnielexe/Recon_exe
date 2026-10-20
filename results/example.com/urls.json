@@ -1,0 +1,11 @@
+{
+    "start_url": "https://example.com/",
+    "urls_found": 1,
+    "results": [
+        {
+            "url": "https://example.com/",
+            "endpoint": "/",
+            "parameters": {}
+        }
+    ]
+}
