@@ -7,6 +7,7 @@ from recon.modules import services
 from recon.modules import urls
 from recon.modules import technologies
 from recon.core.output import save_json
+from recon.core.report import generate_report
 
 class Runner():
     def __init__(self, config: Config):
@@ -165,3 +166,11 @@ class Runner():
 
         else:
             print("No technologies identified.")
+
+
+        #Reporting 
+        print("\n[+] Generating Report")
+
+        report_path = generate_report(output_dir, self.config.target)
+
+        print(f"Report saved to: {report_path}")
